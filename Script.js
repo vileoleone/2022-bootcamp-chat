@@ -26,11 +26,13 @@ function styleFooter() {
    footerBox.style.backgroundColor = "#32B72F";
    footerBox.querySelector("p").innerHTML = "Fechar o pedido";
    footerBox.querySelector("p").style.fontWeight = "700";
+   footerBox.classList.add("ready-to-close")
 }
 function initialStyleFooter() {
    footerBox.style.backgroundColor = "#CBCBCB";
    footerBox.querySelector("p").innerHTML = "Selecione os 3 itens <br> para fechar o pedido";
    footerBox.querySelector("p").style.fontWeight = "400";
+   footerBox.classList.remove,("ready-to-close")
 }
 
 function verifyNumberOfChoices () {
@@ -51,7 +53,6 @@ function optionClick(boxChosen) {
    //Consertando bug do usuário clicar duas vezes no mesmo item
    if (boxChosen.classList.contains("selectedStyle")) {
       let IconToHide = boxChosen.querySelector(".online");
-      styleOff(boxChosen, IconToHide);
       verifyNumberOfChoices();
       return;
    }
@@ -68,6 +69,38 @@ function optionClick(boxChosen) {
    else {styleOn(boxChosen, IconToDisplay)};
    //Verificando se o pedido foi feito de maneira completa
    verifyNumberOfChoices() 
+   linkToContact();
 }
+
+function linkToContact() {
+   let footer =document.querySelector(".footer-box") 
+   if (footerBox.classList.contains("ready-to-close")) {
+     footer.onmouseover = () => {
+      footer.style.cursor ="pointer";
+     }
+      footer.onclick = () => location.href = "https://wa.me/?text="+constructString();
+   }
+}
+
+function constructString () {
+   let cuisinesToClose = document.querySelectorAll(".selectedStyle")
+   let foodToClose =cuisinesToClose[0].querySelector("p2").innerHTML
+   let drinkToClose =cuisinesToClose[1].querySelector("p2").innerHTML
+   let sweetToClose =cuisinesToClose[2].querySelector("p2").innerHTML
+   //
+   let foodPrice = Number(cuisinesToClose[0].querySelector("p4").innerHTML.replace(/[a-z]|[$]/gi,"").replace(/[,]/,"."))
+   let drinkPrice = Number(cuisinesToClose[1].querySelector("p4").innerHTML.replace(/[a-z]|[$]/gi,"").replace(/[,]/,"."))
+   let sweetPrice = Number(cuisinesToClose[2].querySelector("p4").innerHTML.replace(/[a-z]|[$]/gi,"").replace(/[,]/,"."))
+   //
+   let totalPrice = foodPrice + drinkPrice + sweetPrice; 
+   let partialString = `Olá, gostaria de fazer o pedido:
+   - Prato: ${foodToClose}
+   - Bebida: ${drinkToClose}
+   - Sobremesa: ${sweetToClose}
+   Total: R$ ${totalPrice.toFixed(2)}`
+   //
+   let totalString = encodeURIComponent(partialString);
+   return totalString;
+   }
 
 
