@@ -38,8 +38,9 @@ body {
     overflow-x: scroll;  
 }
 .choice-box::-webkit-scrollbar {
-    width: 0;
+    width:0;
 }
+
 .footer-box {
     background-color: #FFFFFF;
     bottom: 0;
