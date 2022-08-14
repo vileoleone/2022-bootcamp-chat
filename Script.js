@@ -4,8 +4,8 @@ function typeOfCuisine (clickedBox) {
    let cuisineSelector;
    let secondClass = clickedBox.classList[1];
    if (secondClass == "food") {cuisineType = ".foodCuisine"}
-   else if (secondClass =="drink") {cuisineType = ".drinkCuisine"}; 
-   else { cuisineType = ".sweetCuisine"};
+   else if (secondClass =="drink") {cuisineType = ".drinkCuisine"} 
+   else {cuisineType = ".sweetCuisine"};
    cuisineSelector = document.querySelector(cuisineType);
    return cuisineSelector;
 }
