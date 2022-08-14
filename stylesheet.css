@@ -19,6 +19,7 @@ body {
     padding-top: 15px;
     width: 100vw;
     font-family: 'Righteous', cursive;
+    z-index:1;
 }
 
 .above-header p {
@@ -57,11 +58,12 @@ body {
 
 .outer-selection-box {
     width: 170px;
-    padding: 15px;
+    padding: 15px 10px;
     background-color: #FFFFFF;
     border-radius: 10px;
     margin-right: 15px;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.25);
+    border: 6px solid #FAFAFA;
 }
 
 .inner-selecton-box {
@@ -103,6 +105,11 @@ body {
     font-weight: 300;
 }
 
+.inner-selecton-box span {
+    display: flex;
+    justify-content: space-between;
+}
+
 .footer-box {
     background-color: #FFFFFF;
     display: flex;
@@ -115,7 +122,7 @@ body {
     padding: 15px 25px 15px 25px;
 }
 
-.open-order-box {
+.order-box {
     background-color:#CBCBCB;
     border-radius: 50px;
     height: auto;
@@ -125,10 +132,10 @@ body {
     align-items: center;
 }
 
-.open-order-box p {
+.order-box p {
     color: #FFFFFF;
-    font-family: 'roboto', cursive;
-    font-size: 20px;
+    font-family: 'Roboto', cursive;
+    font-size: 25px;
     font-weight: 400;
     margin: 0;
 }
@@ -136,3 +143,22 @@ body {
 .choice-box::-webkit-scrollbar {
     width: 0;
   }
+
+  .selectedStyle {
+   border: solid 6px #32B72F;
+  }
+
+
+ion-icon[name="checkmark-outline"] {
+    background-color: #32B72F;
+    color: #FAFAFA;
+    border-radius: 10px;
+}
+
+.hideIcon {
+    display: none;
+}
+
+.online {
+    display: initial;
+}
