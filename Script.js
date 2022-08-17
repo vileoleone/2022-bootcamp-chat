@@ -28,8 +28,10 @@ function showAndShuffle (number) {
     for (let index = 0; index <cardNumber; index++) {
         arrayToShuffle.push(cardsList[index]);
     }
+    arrayToShuffle.sort(comparador);
     for (let index = 0; index < arrayToShuffle.length; index++) {
-        arrayToShuffle[index].classList.remove("hidden")
+     arrayToShuffle[index].classList.remove("hidden")
+     arrayToShuffle[index].style.order = index;
     }
 }
 initialNumberInput ()
@@ -58,9 +60,9 @@ function gameLogic (element) {
        if (temporaryArray[0].classList[1] === temporaryArray[1].classList[1]) {
         setTimeout(() => {
             temporaryArray[0].classList.add("hidden");
-            flipCardFrontBack(temporaryArray[0]);
+            flipCardBackFront(temporaryArray[0]);
             temporaryArray[1].classList.add("hidden");
-            flipCardFrontBack(temporaryArray[1]);
+            flipCardBackFront(temporaryArray[1]);
             temporaryArray = [];
             cardCounting = cardCounting-1;
             console.log(cardCounting)
