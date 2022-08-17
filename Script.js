@@ -36,12 +36,13 @@ function showAndShuffle (number) {
 }
 initialNumberInput ()
 
-function flipCardBackFront(element) {
+function flipCardBackToFront(element) {
+    //children[1] = 'front-side' children [0] = 'backside'
     element.children[1].classList.remove("hidden");
     element.children[0].classList.add("hidden"); 
 }
 
-function flipCardFrontBack(element) {
+function flipCardFrontToBack(element) {
     element.children[1].classList.add("hidden");
     element.children[0].classList.remove("hidden");    
 }
@@ -54,18 +55,24 @@ function compareCards() {
 function gameLogic (element) {
     if (temporaryArray.length < 2) {
         temporaryArray.push(element);
-        flipCardBackFront(element);
+        flipCardBackToFront(element);
     }
+    if (temporaryArray.length == 2 && temporaryArray[0].style.order === temporaryArray[1].style.order) {
+        alert("aí não coleguinha");
+        temporaryArray.splice(1,1)
+        return;
+    }
+
     if (temporaryArray.length == 2){
+        
        if (temporaryArray[0].classList[1] === temporaryArray[1].classList[1]) {
         setTimeout(() => {
+            flipCardFrontToBack(temporaryArray[0]);
+            flipCardFrontToBack(temporaryArray[1]);
             temporaryArray[0].classList.add("hidden");
-            flipCardBackFront(temporaryArray[0]);
             temporaryArray[1].classList.add("hidden");
-            flipCardBackFront(temporaryArray[1]);
             temporaryArray = [];
             cardCounting = cardCounting-1;
-            console.log(cardCounting)
             setTimeout(() => {
                 if(cardCounting == 0) {
                     alert("você venceu au!!")
@@ -73,11 +80,11 @@ function gameLogic (element) {
                 }
             }, 1000)
         }, 2000)
-       } else {
-        setTimeout(() => {
-        flipCardFrontBack(temporaryArray[0]);
-        flipCardFrontBack(temporaryArray[1]);
-        temporaryArray = [];
+       }else {
+            setTimeout(() => {
+            flipCardFrontToBack(temporaryArray[0]);
+            flipCardFrontToBack(temporaryArray[1]);
+            temporaryArray = [];
             }, 2000);
        }
     }
