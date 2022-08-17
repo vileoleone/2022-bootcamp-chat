@@ -24,7 +24,6 @@ body {
     flex-wrap: wrap;
     height: 340px;
     padding: 17.5px;
-    width: 1100px;
     justify-content: center;
 }
 
@@ -46,5 +45,5 @@ body {
 }
 
 .hidden {
-    display:none;
+    display: none;
 }
