@@ -48,3 +48,8 @@ body {
 .hidden {
     display: none;
 }
+
+.invisible {
+    background-color: aqua;
+    border: black 2px solid;
+}
