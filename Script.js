@@ -49,7 +49,6 @@ function gameLogic (element) {
     }
     clickCounts++;
     console.log(clickCounts);
-    flipCardBackToFront(element);
 //Caso o jogador clique na mesma carta duas vezes
     if (temporaryArray.length == 2 && temporaryArray[0].style.order === temporaryArray[1].style.order) {
         temporaryArray.splice(1,1)
@@ -57,6 +56,7 @@ function gameLogic (element) {
         console.log(clickCounts);
         return;
     }
+    element.classList.toggle("flip");
     if (temporaryArray.length == 2){
        if (temporaryArray[0].classList[1] === temporaryArray[1].classList[1]) {
             temporaryArray[0].setAttribute("onclick","");
@@ -68,17 +68,17 @@ function gameLogic (element) {
                     alert(`você venceu  em ${clickCounts} jogadas!!`)
                     clickCounts = 0;
                     for (let index = 0; index < cardNumber; index++) {
-                        flipCardFrontToBack(cardsList[index]);
+                        cardsList[index].classList.toggle("flip");
                         cardsList[index].setAttribute("onclick", "gameLogic(this)")
-                        cardsList[index].classList.toggle("hidden");
+                        cardsList[index].classList.add("hidden");
                     }
                     initialNumberInput();
                 }
-            }, 1000)
+            }, 2000)
        }else {
             setTimeout(() => {
-            flipCardFrontToBack(temporaryArray[0]);
-            flipCardFrontToBack(temporaryArray[1]);
+            temporaryArray[0].classList.toggle("flip")
+            temporaryArray[1].classList.toggle("flip")
             temporaryArray = [];
             }, 1000);
        }
@@ -87,13 +87,13 @@ function gameLogic (element) {
 // Funções complementares para funcionamento da função principal
 function flipCardBackToFront(element) {
     //children[1] = 'front-side' children [0] = 'backside'
-    element.children[1].classList.remove("hidden");
-    element.children[0].classList.add("hidden"); 
+    element.children[1].classList.toggle("flip");
+    element.children[0].classList.toggle("flip"); 
 }
 
 function flipCardFrontToBack(element) {
-    element.children[1].classList.add("hidden");
-    element.children[0].classList.remove("hidden");    
+    element.children[1].classList.toggle("flip");
+    element.children[0].classList.toggle("flip");    
 }
 
 function compareCards() {

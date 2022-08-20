@@ -6,7 +6,6 @@ body {
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
-    position: relative;
 }
 
 .initial-header {
@@ -21,24 +20,45 @@ body {
 .main-box {
     border: solid black 2px;
     display: flex;
-    flex-direction: row; 
     flex-wrap: wrap;
-    height: 340px;
-    padding: 17.5px;
+    width: 70vw;
     justify-content: center;
+    padding: 20px;
 }
 
 .card-box {
+    position: relative;
+    width: 150px;
+    height: 120px;
+    perspective: 1000px;
+    transform-style: preserve-3d ;
+    transition: transform 1s;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 55px;
+}
+
+.flip {
+    transform: rotateY(180deg);
+}
+
+.front-side, .back-side {
     align-items: center;
     background-color: #A7E9AF ;
     border:#99CEA8 solid 1px;
     display: flex;
     height: 150px;
     justify-content: center;
-    margin-left: 17.5px;
-    margin-right: 17.5px;
     width: 120px;
+    position: absolute;
+    backface-visibility: hidden;
 }
+.back-side {
+    transform: rotateY(180deg);
+}
+
+
 
 .card-box img {
     height: 100px;
