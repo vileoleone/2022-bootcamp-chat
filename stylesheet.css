@@ -1,11 +1,16 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
 
+html {
+    height: 100%;
+}
+
 body {
     align-items: center;
     background-color: #EEF9BF;
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
+    width: 100vw;
 }
 
 .initial-header {
@@ -15,19 +20,31 @@ body {
     font-style: bold;
     margin-bottom: 50px;
     margin-top: 40px;
+    text-align: center;
+    font-weight: 700;
 }
 
 .main-box {
-    border: solid black 2px;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    max-width: 60vw;
+    min-height: 100%;
+}
+
+.inner-box{
+    position: relative;
     display: flex;
     flex-wrap: wrap;
-    width: 70vw;
     justify-content: center;
-    padding: 20px;
+    align-items: center;
+    max-width: 100%;
+    max-height: 100%;
+    padding-top: 20px;
 }
 
 .card-box {
-    position: relative;
     width: 150px;
     height: 120px;
     perspective: 1000px;
@@ -36,7 +53,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-bottom: 55px;
+    margin-bottom: 65px;
 }
 
 .flip {
@@ -45,31 +62,39 @@ body {
 
 .front-side, .back-side {
     align-items: center;
+    backface-visibility: hidden;
     background-color: #A7E9AF ;
-    border:#99CEA8 solid 1px;
+    border-radius:5px ;
+    box-shadow: 1px 1px 1px 1px #99CEA8;
     display: flex;
     height: 150px;
     justify-content: center;
-    width: 120px;
     position: absolute;
-    backface-visibility: hidden;
+    width: 120px;
 }
 .back-side {
     transform: rotateY(180deg);
 }
 
-
-
 .card-box img {
     height: 100px;
-    width: 80px;
+    width: 100px;
 }
 
 .hidden {
     display: none;
 }
 
-.invisible {
-    background-color: aqua;
-    border: black 2px solid;
+@media (max-width:767px){
+    .initial-header{
+        font-size: 36px;
+        line-height: 42px;
+        text-align: center;
+        font-style: bold;
+        font-weight: 700;
+    }
+    .main-box .inner-box{
+        flex-direction: column;
+        height: fit-content;
+    }
 }
