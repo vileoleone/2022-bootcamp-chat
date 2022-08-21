@@ -100,7 +100,5 @@ function compareCards() {
     let comparison = (temporaryArray[0].classList[1] === temporaryArray[1].classList[1]) ? true : false;
     return comparison;
 }
-
-
 // Comando incial
 initialNumberInput ()
