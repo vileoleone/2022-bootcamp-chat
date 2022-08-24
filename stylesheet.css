@@ -1,1 +1,147 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+
+a:link {
+    text-decoration: none;
+    color:#696969;
+  }
+
+  .aside-bar {
+    background-color: #FFFFFF;
+    z-index: 3;
+    height: 100%;
+    width: 52vw;
+    position: fixed;
+    right: 0;
+    top: 0;
+  }
+
+  .black-visibility {
+    background-color: #000000;
+    opacity: 60%;
+    z-index: 3;
+    height: 100%;
+    width: 45vw;
+    position: fixed;
+    left: 0;
+    top: 0;
+    display: none;
+  }
+
+  .aside-title {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #000000;
+    font-size: 16px;
+    font-weight: 700;
+    text-align: center;
+    width: 100%;
+    height: 80px;
+  }
+
+body {
+    background-color: #FFFFFF;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 100vw;
+    height: 100%;
+    font-family: 'Roboto', sans-serif;
+}
+
+.logo {
+    width: 130px;
+    height: 90px;
+    margin-top: 70px;
+}
+
+.entry-input {
+    margin-top: 90px;
+    height: 15px;
+}
+
+.entry-button {
+    margin-top: 15px;
+    width: 100px;
+    height: 45px;
+    background-color: #E7E7E7;
+    font-family: 'Roboto', Arial, Helvetica, sans-serif;
+    font-weight: 400;
+    border-radius: 10px;
+    border: #D7D7D7;
+    color:#696969;
+    font-size: 18px;
+}
+
+.chat {
+    z-index:0;
+    background-color: #E7E7E7;
+    width: 100vw;
+    height: 100vh;
+    margin-top:81px;
+    margin-bottom: 80px;
+}
+.head-above {
+    background-color:#FFFFFF;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    width: 100vw;
+    height: 80px;
+    top:0;
+    z-index:1;
+    position: fixed;
+    border-radius: 5px;
+    box-shadow: 0px 4px rgba(0, 0, 0, 0.05)  ;
+  }
+
+  .head-above img {
+    width: 75px;
+    height: 55px;
+    margin-left: 20px ;
+  }
+
+.head-above ion-icon {
+    height: 45px;
+    width: 45px;
+    margin-right: 20px;
+}
+input:focus {
+    box-shadow: 0 0 0 0;
+    border: 0 none;
+    outline: 0;
+} 
+.user-input {
+    background-color:#FFFFFF;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    width: 100vw;
+    height: 80px;
+    bottom: 0;
+    position: fixed;
+    box-shadow: 0px -4px rgba(0, 0, 0, 0.05) 
+}
+
+.user-write {
+    width: 80%;
+    height: 88%;
+    border:none ;
+    display: flex;
+    border: none;
+}
+.user-write[type="text"] {
+     font-size: 18px;
+     color: #000000;
+     font-weight: 300;
+     margin-left: 15px;
+    }
+
+.user-input ion-icon {
+    width: 30px;
+    height: 30px;
+    margin-right: 35px;
+}
