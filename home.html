@@ -9,11 +9,51 @@
     <title>projeto5-batepapouol</title>
 </head>
 <body>
-    <figure class="logo">
-        <img src="./content_src/logo.png" alt="logo da uol">
-    </figure>
-    <input type="text" class="entry-input" value="Digite seu nome">
-    <button class="entry-button" type="submit">  <a href="chat.html">Entrar</a></button>
+    <section class="login-section">
+        <figure class="logo">
+            <img src="./content_src/logo.png" alt="logo da uol">
+        </figure>
+        <input type="text" class="entry-input" placeholder="Digite seu nome">
+        <button class="entry-button" type="submit" onclick="initialChatEntry()">Entrar</button>
+    </section>
+    <section class="chat-section hidden">
+        <header class="head-above">
+            <img src="./content_src/logo.png" alt=" logo da uol">
+            <ion-icon name="people" class="peopleIcon" onclick="showSideBar()"></ion-icon>
+        </header>
+        <main class="chat">
+        </main>
+        <div class="user-input">
+            <input type="text" class="user-write" value="Escreva aqui..." >
+            <ion-icon name="paper-plane-outline"></ion-icon>
+        </div>
+        <aside class="aside-bar">
+            <div class="aside-title">
+                Escolha um contato para enviar a mensagem:
+            </div>
+            <span class="list">
+                <ul>
+                    <li><ion-icon name="person-circle"></ion-icon></ion-icon>
+                        <span> Todos</span>
+                    </li>
+                </ul>
+            </span>
+            <div class="aside-title">
+                Escolha a visibilidade:
+            </div>
+            <span class="list">
+                <ul>
+                    <li><ion-icon name="lock-open"></ion-icon></ion-icon>
+                        <span> Público</span>
+                    </li>
+                    <li><ion-icon name="lock-closed"></ion-icon></ion-icon>
+                        <span> Reservadamente</span>
+                    </li>
+                </ul>
+            </span>
+            <div class="black-visibility" onclick="hideSideBar()"></div>
+        </aside>
+    </section>
     <script src="https://unpkg.com/ionicons@5.4.0/dist/ionicons.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="Script.js" type="text/javascript"></script>

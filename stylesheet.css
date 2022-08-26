@@ -13,6 +13,24 @@ a:link {
     position: fixed;
     right: 0;
     top: 0;
+    font-size: 16px;
+    display: none;
+  }
+
+  .aside-bar ul {
+    list-style-type:none;
+  }
+
+  .aside-bar li {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+
+  .aside-bar ion-icon {
+     margin-right: 10px;
+     width: 25px;
+     height: 25px;
   }
 
   .black-visibility {
@@ -49,6 +67,31 @@ body {
     height: 100%;
     font-family: 'Roboto', sans-serif;
 }
+.chat {
+  z-index:0;
+  background-color: #E7E7E7;
+  width: 100vw;
+  height: 100vh;
+  margin-top:81px;
+  margin-bottom: 80px;
+  padding-top: 10px;
+  color: #000000;
+  font-size: 14px;
+}
+.chatbox {
+  width: 100vh;
+  height: 40px;
+  margin-bottom: 5px;
+  background-color: #DCDCDC;
+  display: flex;
+  padding-left: 10px;
+}
+.login-section {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
 
 .logo {
     width: 130px;
@@ -58,7 +101,14 @@ body {
 
 .entry-input {
     margin-top: 90px;
-    height: 15px;
+    height: 50px;
+    width: 260px;
+    text-align: center;
+    border-radius: 5px;
+    font-size: 18px;
+    font-weight: 400;
+    color: #AEAEAE;
+    border: #D7D7D7 1px solid;
 }
 
 .entry-button {
@@ -74,13 +124,8 @@ body {
     font-size: 18px;
 }
 
-.chat {
-    z-index:0;
-    background-color: #E7E7E7;
-    width: 100vw;
-    height: 100vh;
-    margin-top:81px;
-    margin-bottom: 80px;
+.entry-input:focus {
+  border: #D7D7D7 1px solid;
 }
 .head-above {
     background-color:#FFFFFF;
@@ -108,11 +153,16 @@ body {
     width: 45px;
     margin-right: 20px;
 }
+.hidden {
+  display: none;
+}
+
 input:focus {
     box-shadow: 0 0 0 0;
     border: 0 none;
     outline: 0;
 } 
+
 .user-input {
     background-color:#FFFFFF;
     display: flex;
