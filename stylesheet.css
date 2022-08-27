@@ -58,18 +58,18 @@ a:link {
   }
 
 body {
-    background-color: #FFFFFF;
+    background-color: #E7E7E7;
     display:flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
     width: 100vw;
     height: 100%;
+    overflow-x: none;
     font-family: 'Roboto', sans-serif;
 }
 .chat {
   z-index:0;
-  background-color: #E7E7E7;
   width: 100vw;
   height: 100vh;
   margin-top:81px;
@@ -78,13 +78,24 @@ body {
   color: #000000;
   font-size: 14px;
 }
+
+.chat-container {
+  overflow-y: scroll;
+  background-color: red;
+
+}
+
 .chatbox {
   width: 100vh;
-  height: 40px;
+  min-height: 40px;
   margin-bottom: 5px;
   background-color: #DCDCDC;
   display: flex;
   padding-left: 10px;
+  font-size: 14px;
+  align-items: center;
+  font-weight: 400;
+  flex-wrap: wrap;
 }
 .login-section {
   display: flex;
@@ -157,11 +168,25 @@ body {
   display: none;
 }
 
+.private {
+  background-color: #FFDEDE;
+  min-height:65px;
+}
+
+.normal {
+  background-color: #FFFFFF;
+}
+
 input:focus {
     box-shadow: 0 0 0 0;
     border: 0 none;
     outline: 0;
 } 
+
+.time {
+  color:#AAAAAA;
+  margin-right: 10px;
+}
 
 .user-input {
     background-color:#FFFFFF;

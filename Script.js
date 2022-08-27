@@ -1,13 +1,14 @@
 const loginSection = document.querySelector(".login-section");
 const chatSection = document.querySelector(".chat-section");
 const chatDiv = document.querySelector(".chat");
+const chatContainer= document.querySelector(".chat-container")
 const iconList = document.querySelector(".list ul");
 let peopleIcon = document.querySelector(".peopleIcon")
 let sideBar = document.querySelector(".aside-bar")
 let userName = document.querySelector(".entry-input")
 let homeButton = document.querySelector(".entry-button")
-let nameOfUser;
 let blackWindow = document.querySelector(".black-visibility")
+let messagesInObject;
 // Função para chamar o side-bar
 function showSideBar() {
     sideBar.style.display = "initial"
@@ -29,110 +30,82 @@ function addNametoList(name) {
     </li>`
 }
 
-function removeNametoList(name) {
-    iconList.innerHTML-=
-    `<li><ion-icon name="people"></ion-icon>
-        <span> ${name}</span>
-    </li>`
-}
-
-function entryAnnounce(name) {
-    chatDiv.innerHTML +=
-    `<div class="chatbox"> 
-        <p>(09:21:45) <b>${name}</b> entra na sala...</p> 
-     </div>`
-}
-
-function departureAnnounce(name) {
-    chatDiv.innerHTML +=
-    `<div class="chatbox"> 
-        <p>(09:21:45) <b>${name}</b> saiu da sala...</p> 
-     </div>`
-}
-
-function postName() {
-    nameOfUser= userName.value;
-    let nameWritten = nameIntoObject(userName.value);
-    let promisse = axios.post('https://mock-api.driven.com.br/api/v6/uol/participants',nameWritten)
-    return promisse
-}
-function postStatus() {
-    nameOfUser= userName.value;
-    let nameWritten = nameIntoObject(userName.value);
-    let promisse = axios.post('https://mock-api.driven.com.br/api/v6/uol/status',nameWritten)
-    return promisse    
-}
-
-function statusOn(response) {
-    return console.log(true)
-}
-
-function statusOFF(response) {
-    removeNametoList(nameOfUser);
-    departureAnnounce(nameOfUser);
-}
-
-function callForStatus() {
-    let serverAwnser = postStatus();
-    serverAwnser.then(statusOn);
-    serverAwnser.catch(statusOFF);
-}
-
 function nameIntoObject (name) {
     return {
         name: `${name}`
       }
 }
 
+function postName() {
+    let nameWritten = nameIntoObject(userName.value);
+    let promisse = axios.post('https://mock-api.driven.com.br/api/v6/uol/participants',nameWritten)
+    return promisse
+}
+function postStatus() {
+    let nameWritten = nameIntoObject(userName.value);
+    let promisse = axios.post('https://mock-api.driven.com.br/api/v6/uol/status',nameWritten)
+}
+//Funções para response no login 
 function sucessEntry(response) {
+    nameOfUser = userName.value
     loginSection.classList.toggle("hidden");
     chatSection.classList.toggle("hidden");
     addNametoList(nameOfUser);
-    entryAnnounce(nameOfUser);
-    setInterval(callForStatus, 5000)
+    setInterval(chatInitial, 3000)
+    setInterval(postStatus, 5000)
 }
 function entryDenied(erro) {
-    const statusCode = erro.response.status
+    let statusCode = erro.response.status
     if(statusCode === 400) {
         userName.value="";
         alert("por favor digite um nome válido")
     }
 }
-
 function initialChatEntry(element) {
     let ServerAwnser = postName();
     ServerAwnser.then(sucessEntry)
     ServerAwnser.catch(entryDenied);
  }
 //
-// Requisições e funções para indicar status online
-// 
-chatInitial
-function checkStatus(name) {
-    console.log(name);
-}
-
-//
 // Requisições e funções para chamar mensagem
 // 
 
 function receivedMessages(response) {
-    console.log(response);
- }
-
-function messageError(erro) {
-    const statusCode = erro.response.status
-    if(statusCode === 400) {
-        userName.value="";
-        alert("por favor digite um nome válido")
+    messagesInObject = response.data
+    chatDiv.innerHTML=""
+    for (let i = 0; i < messagesInObject.length; i++) {
+        currentMessage =messagesInObject[i];
+        if(messagesInObject[i].type==="status") {
+            chatDiv.innerHTML+=
+            `<span class = "chatbox">
+                <div class="time">(${messagesInObject[i].time})</div>
+                <div><b>${messagesInObject[i].from}</b> ${messagesInObject[i].text}</div>
+            </span>`
+            }
+        if(messagesInObject[i].type==="message") {
+            chatDiv.innerHTML+=
+            `<span class = "chatbox normal">
+                <div class="time">(${messagesInObject[i].time})</div>
+                <div><b>${messagesInObject[i].from}</b> para <b>${messagesInObject[i].to}: </b>${messagesInObject[i].text}</div>
+            </span>`
+            }
+        if(messagesInObject[i].type==="private_message") {
+            chatDiv.innerHTML+=
+            `<span class = "chatbox private">
+                <div class="time">(${messagesInObject[i].time})</div>
+                <div><b>${messagesInObject[i].from}</b> Reservadamente para <b>${messagesInObject[i].to}: </b>${messagesInObject[i].text}</div>
+            </span>`
+            }
     }
+    let lastMessage = chatDiv.querySelectorAll(".chatbox");
+    lastMessage[lastMessage.length-1].scrollIntoView(false);
+ }
+function messageError(erro) {
+    let statusCode = erro.response.status
+    console.log(statusCode);
 }
-
 function chatInitial() {
-    alert("oi")
-    console.log("oi")
-    //const promisse = axios.get('https://mock-api.driven.com.br/api/v6/uol/messages')
-    //promisse.then(receivedMessages)
-    //promisse.catch(messageError)
+    let promisse = axios.get("https://mock-api.driven.com.br/api/v6/uol/messages")
+    promisse.then(receivedMessages);
+    promisse.catch(messageError);    
 }
-
