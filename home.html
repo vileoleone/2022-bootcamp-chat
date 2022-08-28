@@ -22,22 +22,24 @@
             <ion-icon name="people" class="peopleIcon" onclick="showSideBar()"></ion-icon>
         </header>
         <main class="chat">
-            <div class="chat-container">
-                
-            </div>
+            <div class="chat-container"></div>
         </main>
         <div class="user-input">
-            <input type="text" class="user-write" value="Escreva aqui..." >
-            <ion-icon name="paper-plane-outline"></ion-icon>
+            <input type="text" class="user-write" placeholder="Escreva aqui..." >
+            <ion-icon name="paper-plane-outline" class = "send-Button" onclick="sendMessage()"></ion-icon>
         </div>
-        <aside class="aside-bar">
-            <div class="aside-title">
+        <div class="black-visibility hidden" onclick="hideSideBar()"></div>
+        <aside class="aside-bar">            <div class="aside-title">
                 Escolha um contato para enviar a mensagem:
             </div>
             <span class="list">
                 <ul>
-                    <li><ion-icon name="person-circle"></ion-icon></ion-icon>
-                        <span> Todos</span>
+                    <li>
+                        <ion-icon name="person-circle"></ion-icon>
+                        <span>Todos</span>
+                        <span>
+                            <ion-icon name="checkmark" class = "checkmark" ></ion-icon>
+                        </span>
                     </li>
                 </ul>
             </span>
@@ -45,16 +47,22 @@
                 Escolha a visibilidade:
             </div>
             <span class="list">
-                <ul>
-                    <li><ion-icon name="lock-open"></ion-icon></ion-icon>
+                <ul class="receiver-list">
+                    <li class="receiver open" onclick="forWhom(this)">
+                        <ion-icon name="lock-closed" class="hidden" ></ion-icon>
+                        <ion-icon name="lock-open" ></ion-icon>
                         <span> Público</span>
+                        <span>
+                            <ion-icon name="checkmark" class = "checkmark" ></ion-icon>
+                        </span>
                     </li>
-                    <li><ion-icon name="lock-closed"></ion-icon></ion-icon>
+                    <li class = "receiver closed" onclick="forWhom(this)">
+                        <ion-icon name="lock-closed" ></ion-icon>
+                        <ion-icon name="lock-open" class="hidden" ></ion-icon>
                         <span> Reservadamente</span>
                     </li>
                 </ul>
             </span>
-            <div class="black-visibility" onclick="hideSideBar()"></div>
         </aside>
     </section>
     <script src="https://unpkg.com/ionicons@5.4.0/dist/ionicons.js"></script>

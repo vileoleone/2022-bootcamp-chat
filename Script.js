@@ -8,8 +8,13 @@ let sideBar = document.querySelector(".aside-bar")
 let userName = document.querySelector(".entry-input")
 let homeButton = document.querySelector(".entry-button")
 let blackWindow = document.querySelector(".black-visibility")
+let sendButton = document.querySelector(".send-button");
+let messageToSend = document.querySelector(".user-write");
 let messagesInObject;
-// Função para chamar o side-bar
+let nameWritten;
+//
+// Função auxiliares
+//
 function showSideBar() {
     sideBar.style.display = "initial"
     blackWindow.style.display = "initial"
@@ -19,9 +24,6 @@ function hideSideBar() {
     sideBar.style.display = "none"
     blackWindow.style.display = "none"
  }
-//
-// Requisições e funções para entrar no chat
-//
 
 function addNametoList(name) {
     iconList.innerHTML+=
@@ -31,11 +33,38 @@ function addNametoList(name) {
 }
 
 function nameIntoObject (name) {
+    nameWritten = name;
     return {
         name: `${name}`
       }
 }
 
+function forWhom(element) {;
+    let ul = document.querySelector(".receiver-list");
+    let itens = ul.getElementsByTagName('ion-icon');
+    //const nameClass = element;
+    //console.log(nameClass.classList.value)
+    switch (element.classList.value) {
+        case "receiver open":
+            element.removeChild(element.children[0])
+            
+            break;
+        case "receiver closed":
+            element.removeChild(element.children[0])
+
+            break;
+        default :
+        console.log(element.classname)
+    }
+
+
+
+   
+}
+
+//
+// Requisições e funções para entrar no chat
+//
 function postName() {
     let nameWritten = nameIntoObject(userName.value);
     let promisse = axios.post('https://mock-api.driven.com.br/api/v6/uol/participants',nameWritten)
@@ -109,3 +138,27 @@ function chatInitial() {
     promisse.then(receivedMessages);
     promisse.catch(messageError);    
 }
+//
+// Funções para envio de mensagem
+//
+function sendMessage() {
+    let messageToPost = {
+        from: userName.value,
+        to: "Todos",
+        text: messageToSend.value,
+        type: "message" 
+    }
+    const promisse = axios.post("https://mock-api.driven.com.br/api/v6/uol/messages",messageToPost)
+    promisse.then( () => {
+        messageToSend.value =""
+        chatInitial();
+    })
+    promisse.catch( () => {
+        window.location.reload();
+    })
+}
+
+
+
+
+
