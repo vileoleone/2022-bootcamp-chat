@@ -16,7 +16,7 @@
         <input type="text" class="entry-input" placeholder="Digite seu nome">
         <button class="entry-button" type="submit" onclick="initialChatEntry()">Entrar</button>
     </section>
-    <section class="chat-section hidden">
+    <section class="chat-section hidden ">
         <header class="head-above">
             <img src="./content_src/logo.png" alt=" logo da uol">
             <ion-icon name="people" class="peopleIcon" onclick="showSideBar()"></ion-icon>
@@ -25,14 +25,18 @@
             <div class="chat-container"></div>
         </main>
         <div class="user-input">
+        <div class="input-information">
             <input type="text" class="user-write" placeholder="Escreva aqui..." >
+            <span class="forwhom">Enviando para Todos</span>
+        </div>
             <ion-icon name="paper-plane-outline" class = "send-Button" onclick="sendMessage()"></ion-icon>
         </div>
         <div class="black-visibility hidden" onclick="hideSideBar()"></div>
-        <aside class="aside-bar">            <div class="aside-title">
+        <aside class="aside-bar">            
+            <div class="aside-title">
                 Escolha um contato para enviar a mensagem:
             </div>
-            <span class="list">
+            <span class="list above">
                 <ul>
                     <li>
                         <ion-icon name="person-circle"></ion-icon>

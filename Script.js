@@ -39,28 +39,15 @@ function nameIntoObject (name) {
       }
 }
 
-function forWhom(element) {;
-    let ul = document.querySelector(".receiver-list");
-    let itens = ul.getElementsByTagName('ion-icon');
-    //const nameClass = element;
-    //console.log(nameClass.classList.value)
-    switch (element.classList.value) {
-        case "receiver open":
-            element.removeChild(element.children[0])
-            
-            break;
-        case "receiver closed":
-            element.removeChild(element.children[0])
+//
+// Função para adicionar o enter no input (Bônus)
+//
 
-            break;
-        default :
-        console.log(element.classname)
+messageToSend.addEventListener("keypress", (enter) => {
+    if (enter.key==="Enter") {
+        sendMessage();
     }
-
-
-
-   
-}
+})
 
 //
 // Requisições e funções para entrar no chat
@@ -74,12 +61,48 @@ function postStatus() {
     let nameWritten = nameIntoObject(userName.value);
     let promisse = axios.post('https://mock-api.driven.com.br/api/v6/uol/status',nameWritten)
 }
-//Funções para response no login 
+
+//
+// Função para pegar a lista de participantes e inserir lista
+//
+
+function getparticipants() {
+    const promisse = axios.get('https://mock-api.driven.com.br/api/v6/uol/participants');
+    promisse.then((response) => {
+        let ready =response.data;
+        iconList.innerHTML=
+        ` <li>
+            <ion-icon name="person-circle"></ion-icon>
+            <span>Todos</span>
+            <span>
+              <ion-icon name="checkmark" class = "checkmark" ></ion-icon>
+            </span>
+          </li>`;
+        for (let i = 0; i < ready.length; i++) {
+            let participant = ready[i].name
+            iconList.innerHTML+=
+            `<li><ion-icon name="people"></ion-icon>
+                <span> ${participant}</span>
+                <span>
+              <ion-icon name="checkmark" class = "checkmark hidden" ></ion-icon>
+            </span>
+            </li>`
+            
+        }
+
+    })
+}
+//
+//Funções para response no momento de login 
+//
 function sucessEntry(response) {
     nameOfUser = userName.value
     loginSection.classList.toggle("hidden");
     chatSection.classList.toggle("hidden");
     addNametoList(nameOfUser);
+    getparticipants();
+    chatInitial();
+    setInterval(getparticipants, 10000)
     setInterval(chatInitial, 3000)
     setInterval(postStatus, 5000)
 }
@@ -96,9 +119,8 @@ function initialChatEntry(element) {
     ServerAwnser.catch(entryDenied);
  }
 //
-// Requisições e funções para chamar mensagem
+// Requisições e funções para chamar mensagens
 // 
-
 function receivedMessages(response) {
     messagesInObject = response.data
     chatDiv.innerHTML=""
@@ -129,6 +151,9 @@ function receivedMessages(response) {
     let lastMessage = chatDiv.querySelectorAll(".chatbox");
     lastMessage[lastMessage.length-1].scrollIntoView(false);
  }
+//
+// Funções para response no envio de mensagem
+// 
 function messageError(erro) {
     let statusCode = erro.response.status
     console.log(statusCode);
@@ -157,8 +182,3 @@ function sendMessage() {
         window.location.reload();
     })
 }
-
-
-
-
-
